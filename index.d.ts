@@ -358,7 +358,7 @@ declare module "gui" {
          * 
          * On Linux the dragged data is not yet available when this is called, you should usually only read data in the handle_drop delegate.
          */
-        handleDragEnter(self: this, info: DraggingInfo, point: PointF): DragOperation;
+        handleDragEnter<T extends View = this>(self: T, info: DraggingInfo, point: PointF): DragOperation;
         /**
          * Called when user moves the cursor over the view while dragging.
          * 
@@ -370,7 +370,7 @@ declare module "gui" {
          * 
          * On Linux the dragged data is not yet available when this is called, you should usually only read data in the handle_drop delegate. 
          */
-        handleDragUpdate(self: this, info: DraggingInfo, point: PointF): DragOperation;
+        handleDragUpdate<T extends View = this>(self: T, info: DraggingInfo, point: PointF): DragOperation;
         /**
          * Called when user releases the dragged data on the view.
          * 
@@ -380,7 +380,7 @@ declare module "gui" {
          * 
          * Returning false will inform the drag source that the drag has been cancelled, and operating system may display some visual effects. 
          */
-        handleDrop(self: this, info: DraggingInfo, point: PointF): boolean;
+        handleDrop<T extends View = this>(self: T, info: DraggingInfo, point: PointF): boolean;
         /**
          * Return whether the view has mouse capture.
          */
@@ -432,38 +432,47 @@ declare module "gui" {
          * This event will also be emitted before the handle_drop event when user drops the data on the view.
          */
         onDragLeave: EventMember<(self: this, event: DraggingInfo) => void>  
+        // onDragLeave(self: this, info: DraggingInfo): void;
         /**
          * Emitted when pressing keyboard.
          */
         onKeyDown: EventMember<(self: this, event: KeyEvent) => boolean | void>  
+        // onKeyDown(self: this, event: KeyEvent): boolean|void;
         /**
          * Emitted when releasing keyboard.
          */
         onKeyUp: EventMember<(self: this, event: KeyEvent) => boolean | void>  
+        // onKeyUp(self: this, event: KeyEvent): boolean|void;
         /**
          * Emitted when pressing mouse buttons.
          */
         onMouseDown: EventMember<(self: this, event: MouseEvent) => boolean | void>  
+        // onMouseDown(self: this, event: MouseEvent): boolean|void;
         /**
          * Emitted when mouse enters the view.
          */
         onMouseEnter: EventMember<(self: this, event: MouseEvent) => boolean | void>  
+        // onMouseEnter(self: this, event: MouseEvent): boolean|void;
         /**
          * Emitted when mouse leaves the view.
          */
         onMouseLeave: EventMember<(self: this, event: MouseEvent) => boolean | void>  
+        // onMouseLeave(self: this, event: MouseEvent): boolean|void;
         /**
          * Emitted when user moves mouse in the view.
          */
         onMouseMove: EventMember<(self: this, event: MouseEvent) => boolean | void>  
+        // onMouseMove(self: this, event: MouseEvent): boolean|void;
         /**
          * Emitted when releasing mouse buttons.
          */
         onMouseUp: EventMember<(self: this, event: MouseEvent) => boolean | void>  
+        // onMouseUp(self: this, event: MouseEvent): void;
         /**
          * Emitted when the view's size has been changed.
          */
         onSizeChanged: EventMember<(self: this) => void>  
+        // onSizeChanged(self: this): void;
         /**
          * Make the view a drag destination that accepets types.
          */
@@ -592,6 +601,7 @@ declare module "gui" {
         getTitle(): string;
         hasBoarder(): boolean;
         isChecked(): boolean;
+        // onClick(self: this): void;
         onClick: Signal<(self: this) => void> | ((self: this) => void)
         setButtonStyle(style: ButtonStyle): void;
         setChecked(isChecked: boolean): void;
@@ -664,13 +674,13 @@ declare module "gui" {
          * 
          * This method will silently fail if the view already has a parent.
          */
-        addChildView(view: View): void;
+        addChildView<T extends View = this>(view: T): void;
         /**
          * Add a child view to the container at index.
          * 
          * This method will silently fail if the view already has a parent. 
          */
-        addChildViewAt(view: View, index: number): void;
+        addChildViewAt<T extends View = this>(view: T, index: number): void;
         /**
          * Return the child view at index.
          * 
@@ -1210,7 +1220,7 @@ declare module "gui" {
          * @param maxsize  Maximum content size.
          */
         setContentSizeConstraints(minsize: SizeF, maxsize: SizeF): void;
-        setContentView(view: View): void;
+        setContentView<T extends View = View>(view: T): void;
         setFullscreen(isFullscreen: boolean): void;
         setFullSizeContentView(full: boolean): void;
         /**
@@ -1572,11 +1582,11 @@ declare module "gui" {
         overflow?: Overflow
 
         padding?: number | string
+        // padding?: Partial<ValuedEdges<number>>
         paddingTop?: number | string
         paddingLeft?: number | string
         paddingRight?: number | string
         paddingBottom?: number | string
-        
         position?: PositionType
 
         width?: number | string
