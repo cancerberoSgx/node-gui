@@ -1,4 +1,5 @@
 // Definitions by Kevin Gravier <kevin@mrkmg.com>
+// Definitions by Sebastián Gurin <sebastigurin@gmail.com>
 
 declare module "gui" {
 
@@ -78,7 +79,7 @@ declare module "gui" {
      * app.onReady = () => console.log('on ready')
      * ```
      */
-    export class Signal<Slot extends (...args: any) => any> {
+    export class Signal<Slot extends (...args: any[]) => any> {
         /**
          * Connect slot to the signal, and return an ID that can be used to disconnect it.
          * 
@@ -423,55 +424,46 @@ declare module "gui" {
         /**
          * Emitted when the mouse capture on view has been released.
          */
-        onCaptureLost: Signal<(self: this) => void> | ((self: this) => void)
+        onCaptureLost: EventMember<(self: this) => void>
         // onCaptureLost(self: this): void;
         /**
          * Emitted when cursor leaves the view while dragging. 
          * 
          * This event will also be emitted before the handle_drop event when user drops the data on the view.
          */
-        onDragLeave: Signal<(self: this, event: DraggingInfo) => void> | ((self: this, event: DraggingInfo) => void)
-        // onDragLeave(self: this, info: DraggingInfo): void;
+        onDragLeave: EventMember<(self: this, event: DraggingInfo) => void>  
         /**
          * Emitted when pressing keyboard.
          */
-        onKeyDown: Signal<(self: this, event: KeyEvent) => boolean | void> | ((self: this, event: KeyEvent) => boolean | void)
-        // onKeyDown(self: this, event: KeyEvent): boolean|void;
+        onKeyDown: EventMember<(self: this, event: KeyEvent) => boolean | void>  
         /**
          * Emitted when releasing keyboard.
          */
-        onKeyUp: Signal<(self: this, event: KeyEvent) => boolean | void> | ((self: this, event: KeyEvent) => boolean | void)
-        // onKeyUp(self: this, event: KeyEvent): boolean|void;
+        onKeyUp: EventMember<(self: this, event: KeyEvent) => boolean | void>  
         /**
          * Emitted when pressing mouse buttons.
          */
-        onMouseDown: Signal<(self: this, event: MouseEvent) => boolean | void> | ((self: this, event: MouseEvent) => boolean | void)
-        // onMouseDown(self: this, event: MouseEvent): boolean|void;
+        onMouseDown: EventMember<(self: this, event: MouseEvent) => boolean | void>  
         /**
          * Emitted when mouse enters the view.
          */
-        onMouseEnter: Signal<(self: this, event: MouseEvent) => boolean | void> | ((self: this, event: MouseEvent) => boolean | void)
-        // onMouseEnter(self: this, event: MouseEvent): boolean|void;
+        onMouseEnter: EventMember<(self: this, event: MouseEvent) => boolean | void>  
         /**
          * Emitted when mouse leaves the view.
          */
-        onMouseLeave: Signal<(self: this, event: MouseEvent) => boolean | void> | ((self: this, event: MouseEvent) => boolean | void)
-        // onMouseLeave(self: this, event: MouseEvent): boolean|void;
+        onMouseLeave: EventMember<(self: this, event: MouseEvent) => boolean | void>  
         /**
          * Emitted when user moves mouse in the view.
          */
-        onMouseMove: Signal<(self: this, event: MouseEvent) => boolean | void> | ((self: this, event: MouseEvent) => boolean | void)
-        // onMouseMove(self: this, event: MouseEvent): boolean|void;
+        onMouseMove: EventMember<(self: this, event: MouseEvent) => boolean | void>  
         /**
          * Emitted when releasing mouse buttons.
          */
-        onMouseUp: Signal<(self: this, event: MouseEvent) => boolean | void> | ((self: this, event: MouseEvent) => boolean | void)
-        // onMouseUp(self: this, event: MouseEvent): void;
+        onMouseUp: EventMember<(self: this, event: MouseEvent) => boolean | void>  
         /**
          * Emitted when the view's size has been changed.
          */
-        onSizeChanged: Signal<(self: this) => void> | ((self: this) => void)
-        // onSizeChanged(self: this): void;
+        onSizeChanged: EventMember<(self: this) => void>  
         /**
          * Make the view a drag destination that accepets types.
          */
@@ -600,7 +592,6 @@ declare module "gui" {
         getTitle(): string;
         hasBoarder(): boolean;
         isChecked(): boolean;
-        // onClick(self: this): void;
         onClick: Signal<(self: this) => void> | ((self: this) => void)
         setButtonStyle(style: ButtonStyle): void;
         setChecked(isChecked: boolean): void;
@@ -653,7 +644,7 @@ declare module "gui" {
     type ColorArg = Color | string;
 
     export class ComboBox extends Picker {
-        static create(): ComboBox;
+        static create<ComboBox>(): ComboBox;
         protected constructor();
         getText(): string;
         onTextChange(self: this): void;
@@ -666,7 +657,7 @@ declare module "gui" {
         /**
          * Create a new container view.
          */
-        static create(): Container;
+        static create<T extends Container = Container>(): T;
         protected constructor();
         /**
          * Append a child view to the container.
@@ -975,7 +966,7 @@ declare module "gui" {
     }
 
     export class Picker extends View {
-        static create(): Picker;
+        static create<T extends Picker = Picker>(): T;
         protected constructor();
         addItem(title: string): void;
         getItems(): string[];
@@ -1130,7 +1121,7 @@ declare module "gui" {
         "within-window";
 
     export class Vibrant extends Container {
-        static create(): Vibrant;
+        static create<Vibrant>(): Vibrant;
         protected constructor();
         getBlendingMode(): VibrantBlendingMode;
         getMaterial(): VibrantMaterial;
@@ -1581,11 +1572,11 @@ declare module "gui" {
         overflow?: Overflow
 
         padding?: number | string
-        // padding?: Partial<ValuedEdges<number>>
         paddingTop?: number | string
         paddingLeft?: number | string
         paddingRight?: number | string
         paddingBottom?: number | string
+        
         position?: PositionType
 
         width?: number | string
