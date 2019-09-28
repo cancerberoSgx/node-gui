@@ -424,54 +424,54 @@ declare module "gui" {
         /**
          * Emitted when the mouse capture on view has been released.
          */
-        onCaptureLost: EventMember<(self: this) => void>
+        onCaptureLost: EventMember<<T extends View = this>(self: T) => void>
         // onCaptureLost(self: this): void;
         /**
          * Emitted when cursor leaves the view while dragging. 
          * 
          * This event will also be emitted before the handle_drop event when user drops the data on the view.
          */
-        onDragLeave: EventMember<(self: this, event: DraggingInfo) => void>  
+        onDragLeave: EventMember<<T extends View = this>(self: T, event: DraggingInfo) => void>  
         // onDragLeave(self: this, info: DraggingInfo): void;
         /**
          * Emitted when pressing keyboard.
          */
-        onKeyDown: EventMember<(self: this, event: KeyEvent) => boolean | void>  
+        onKeyDown: EventMember<<T extends View = this>(self: T, event: KeyEvent) => boolean | void>  
         // onKeyDown(self: this, event: KeyEvent): boolean|void;
         /**
          * Emitted when releasing keyboard.
          */
-        onKeyUp: EventMember<(self: this, event: KeyEvent) => boolean | void>  
+        onKeyUp: EventMember<<T extends View = this>(self: T, event: KeyEvent) => boolean | void>  
         // onKeyUp(self: this, event: KeyEvent): boolean|void;
         /**
          * Emitted when pressing mouse buttons.
          */
-        onMouseDown: EventMember<(self: this, event: MouseEvent) => boolean | void>  
+        onMouseDown: EventMember<<T extends View = this>(self: T, event: MouseEvent) => boolean | void>  
         // onMouseDown(self: this, event: MouseEvent): boolean|void;
         /**
          * Emitted when mouse enters the view.
          */
-        onMouseEnter: EventMember<(self: this, event: MouseEvent) => boolean | void>  
+        onMouseEnter: EventMember<<T extends View = this>(self: T, event: MouseEvent) => boolean | void>  
         // onMouseEnter(self: this, event: MouseEvent): boolean|void;
         /**
          * Emitted when mouse leaves the view.
          */
-        onMouseLeave: EventMember<(self: this, event: MouseEvent) => boolean | void>  
+        onMouseLeave: EventMember<<T extends View = this>(self: T, event: MouseEvent) => boolean | void>  
         // onMouseLeave(self: this, event: MouseEvent): boolean|void;
         /**
          * Emitted when user moves mouse in the view.
          */
-        onMouseMove: EventMember<(self: this, event: MouseEvent) => boolean | void>  
+        onMouseMove: EventMember<<T extends View = this>(self: T, event: MouseEvent) => boolean | void>  
         // onMouseMove(self: this, event: MouseEvent): boolean|void;
         /**
          * Emitted when releasing mouse buttons.
          */
-        onMouseUp: EventMember<(self: this, event: MouseEvent) => boolean | void>  
+        onMouseUp: EventMember<<T extends View = this>(self: T, event: MouseEvent) => boolean | void>  
         // onMouseUp(self: this, event: MouseEvent): void;
         /**
          * Emitted when the view's size has been changed.
          */
-        onSizeChanged: EventMember<(self: this) => void>  
+        onSizeChanged: EventMember<<T extends View = this>(self: T) => void>  
         // onSizeChanged(self: this): void;
         /**
          * Make the view a drag destination that accepets types.
@@ -712,7 +712,7 @@ declare module "gui" {
          * @param painter The drawing context of the view.
          * @param dirty  The area in the view to draw on.
          */
-        onDraw: EventMember<(self: this, painter: Painter, dirty: RectF) => void>
+        onDraw: EventMember<<T extends View = this>(self: T, painter: Painter, dirty: RectF) => void>
         // onDraw(self: this, painter: Painter, dirty: RectF): void;
         /**
          * Remove a child view from this container.
@@ -747,11 +747,11 @@ declare module "gui" {
         /**
          * Emitted when user has pressed Enter in the view.
          */
-        onActivate: EventMember<(self: this) => void>
+        onActivate: EventMember<<T extends View = this>(self: T) => void>
         /**
          * Emitted when user has changed text.
          */
-        onTextChange: EventMember<(self: this) => void>;
+        onTextChange: EventMember<<T extends View = this>(self: T) => void>;
         /**
          * Change the text in the view.
          */
